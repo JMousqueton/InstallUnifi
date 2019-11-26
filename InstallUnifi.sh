@@ -11,12 +11,12 @@ sudo apt-key adv --keyserver keyserver.ubuntu.com --recv 06E85760C0A52C50
 echo 'deb https://www.ui.com/downloads/unifi/debian stable ubiquiti' | sudo tee /etc/apt/sources.list.d/100-ubnt-unifi.list
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 0C49F3730359A14518585931BC711F9BA15703C6
 echo "deb https://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.4 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.4.list
-sudo apt update && sudo apt install ca-certificates apt-transport-https certbot python3-certbot-nginx nginx unifi -y 
+sudo apt update && sudo apt install ca-certificates apt-transport-https certbot ufw python3-certbot-nginx nginx unifi -y 
 
 #### NGINX Configuration 
 echo -n "Enter your domain name [my.fqdn.com]: "
 read NAME
-       service nginx stop
+       systemctl stop nginx
     echo -e "server {\n\
         listen 80;\n\
         server_name $NAME;\n\
@@ -34,6 +34,10 @@ read NAME
         " > /etc/nginx/sites-enabled/default
     echo "Waiting 10 seconds for nginx start ... "
     sleep 10
-    service nginx start
+    sudo systemctl start nginx 
+    sudo ufw allow 22/tcp 
+    sudo ufw allow http
+    sudo ufw allow https 
+    sudo ufw enable
     certbot -d $NAME --nginx
     service nginx restart
