@@ -14,6 +14,7 @@ echo "deb https://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.4 multiverse"
 sudo apt update
 sudo apt upgrade
 sudo apt install ca-certificates apt-transport-https certbot fail2ban ufw python3-certbot-nginx nginx unifi -y 
+sudo apt autoremove
 
 #### NGINX Configuration 
 echo -n "Enter your domain name [my.fqdn.com]: "
@@ -43,4 +44,4 @@ read NAME
     sudo ufw enable
     certbot -d $NAME --nginx
     sudo service nginx restart
-    sudo apt install postfix mailutils
+    sudo apt install postfix mailutils -y
