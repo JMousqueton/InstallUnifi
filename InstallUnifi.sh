@@ -40,4 +40,5 @@ read NAME
     sudo ufw allow https 
     sudo ufw enable
     certbot -d $NAME --nginx
-    service nginx restart
+    sudo service nginx restart
+    sudo apt install postfix mailutils
