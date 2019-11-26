@@ -2,7 +2,7 @@
 ###################################################################
 # Script Name	: InstallUnifi.sh                                                                                             
 # Description	: Install Script for Unifi on Ubuntu 18.04LTS                                                                             
-# Args       	: server host                                                                                         
+# Args       	:                                                                                         
 # Author     	: Julien Mousqueton                                                 
 # Twitter    	: @JMousqueton                                           
 ###################################################################
