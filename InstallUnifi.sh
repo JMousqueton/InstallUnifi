@@ -37,11 +37,16 @@ read NAME
         " > /etc/nginx/sites-enabled/default
     echo "Waiting 10 seconds for nginx start ... "
     sleep 10
-    sudo systemctl start nginx 
+    sudo systemctl start nginx
+    ### Firewall 
     sudo ufw allow 22/tcp 
     sudo ufw allow http
     sudo ufw allow https 
+    sudo ufw allow 6789/tcp
+    sudo ufw allow 3478/udp
     sudo ufw enable
+    ### Certificat 
     certbot -d $NAME --nginx
     sudo service nginx restart
+    ### Local Mail Server 
     sudo apt install postfix mailutils -y
